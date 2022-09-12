@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 
-interface Props {
+interface props {
   name: string;
   description: string;
   price: number;
@@ -10,23 +10,30 @@ interface Props {
   imageUrl: string;
 }
 
-function Card(props: Props) {
-  return (
-    <div className="card">
-      <img src={props.imageUrl} alt="{props.name}" className="card-img-top" />
-      <div>{props.category}</div>
-      <div className="card-body">
-        <div className="card-title">{props.name}</div>
-        <div className="card-text">{props.description}</div>
-        <div>{props.price}</div>
-        <div>
-          Rating : {props.rating}
-          <i className="bi-star"></i>
+// function Card(props: props) {
+class Card extends React.Component<props> {
+  render() {
+    return (
+      <div className="card">
+        <img
+          src={this.props.imageUrl}
+          alt="{this.props.name}"
+          className="card-img-top"
+        />
+        <div>{this.props.category}</div>
+        <div className="card-body">
+          <div className="card-title">{this.props.name}</div>
+          <div className="card-text">{this.props.description}</div>
+          <div>{this.props.price}</div>
+          <div>
+            Rating : {this.props.rating}
+            <i className="bi-star"></i>
+          </div>
+          <button className="btn btn-primary">Order Now</button>
         </div>
-        <button className="btn btn-primary">Order Now</button>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Card;

@@ -2,8 +2,8 @@
 // import logo from "./logo.svg";
 import "./App.css";
 // import Counter from "./Counter/Counter";
-import Header from "./Header/Header";
-import Menu from "./Menu/Menu";
+import Header from "./components/Header/Header";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   return (

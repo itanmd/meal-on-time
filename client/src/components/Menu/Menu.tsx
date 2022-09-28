@@ -22,39 +22,6 @@ class Menu extends React.Component<MenuProps, MenuState> {
   constructor(props: MenuProps) {
     super(props);
 
-    // const cards = [
-    //   {
-    //     id: 1,
-    //     name: "Fried Chicken",
-    //     description: "fried chicken with chips",
-    //     category: "Chicken",
-    //     price: 15.99,
-    //     rating: 5,
-    //     imageUrl:
-    //       "https://cdn.pixabay.com/photo/2016/04/25/07/32/chicken-cutlet-1351331__340.jpg",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "Greek Salad",
-    //     description: "salad with olives",
-    //     category: "Vegeterian",
-    //     price: 10.55,
-    //     rating: 5,
-    //     imageUrl:
-    //       "https://cdn.pixabay.com/photo/2016/08/09/10/30/tomatoes-1580273__340.jpg",
-    //   },
-    //   {
-    //     id: 3,
-    //     name: "Pad Tai",
-    //     description: "very good",
-    //     category: "asian",
-    //     price: 22.85,
-    //     rating: 5,
-    //     imageUrl:
-    //       "https://cdn.pixabay.com/photo/2015/04/10/00/41/food-715542__340.jpg",
-    //   },
-    // ];
-
     this.state = {
       display: props.defaultDisplay,
       cards: [],
@@ -81,8 +48,8 @@ class Menu extends React.Component<MenuProps, MenuState> {
     }));
   };
 
-  categoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = event.target.value;
+  categoryChange = (selected: string) => {
+    // const selected = event.target.value;
     //event.preventDefault();
 
     const cards = [...this.state.cards];
@@ -106,7 +73,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
           <div className="d-flex align-items-center">
             <label className="pe-2">Category</label>
             <select
-              onChange={this.categoryChange}
+              onChange={(e) => this.categoryChange(e.target.value)}
               value={this.state.selectedCategory}
               className="form-select text-capitalize"
             >
@@ -135,7 +102,11 @@ class Menu extends React.Component<MenuProps, MenuState> {
 
         <div className={this.state.display}>
           {this.state.cardsDisplay.map((card) => (
-            <Card key={card.id} data={card} />
+            <Card
+              key={card.id}
+              data={card}
+              categoryChange={this.categoryChange}
+            />
           ))}
         </div>
       </>

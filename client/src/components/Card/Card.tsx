@@ -13,6 +13,7 @@ export type CardType = {
 
 interface Props {
   data: CardType;
+  categoryChange: Function;
 }
 
 // function Card(props: props) {
@@ -26,7 +27,12 @@ class Card extends React.Component<Props> {
           alt="{this.props.data.name}"
           className="card-img-top"
         />
-        <div className="text-capitalize">{data.category}</div>
+        <button
+          onClick={() => this.props.categoryChange(data.category)}
+          className="text-capitalize badge bg-info border-0"
+        >
+          {data.category}
+        </button>
         <div className="card-body">
           <div className="card-title">{data.name}</div>
           <div className="card-text">{data.description}</div>

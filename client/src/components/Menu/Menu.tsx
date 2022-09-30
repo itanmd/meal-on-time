@@ -103,7 +103,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
         <div className={this.state.display}>
           {this.state.cardsDisplay.map((card) => (
             <Card
-              key={card.id}
+              key={card._id}
               data={card}
               categoryChange={this.categoryChange}
             />

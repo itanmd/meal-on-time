@@ -14,7 +14,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Menu defaultDisplay="list" />} />
+          <Route path="/" element={<Menu defaultDisplay="grid" />} />
           <Route path="/order" element={<Order />} />
         </Routes>
       </BrowserRouter>

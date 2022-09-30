@@ -1,5 +1,6 @@
 import React from "react";
 import "./Card.css";
+import { Link } from "react-router-dom";
 
 export type CardType = {
   id: number;
@@ -41,7 +42,10 @@ class Card extends React.Component<Props> {
             Rating : {data.rating}
             <i className="bi-star"></i>
           </div>
-          <button className="btn btn-primary">Order Now</button>
+          {/* <button className="btn btn-primary">Order Now</button> */}
+          <Link to="/order" className="btn btn-primary">
+            Oder Now
+          </Link>
         </div>
       </div>
     );

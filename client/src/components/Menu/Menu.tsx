@@ -1,6 +1,6 @@
-import { optional } from "joi";
 import React from "react";
 import Card, { CardType } from "../Card/Card";
+import Title from "../Title/Title";
 import "./Menu.css";
 // import cards from "./data";
 
@@ -67,7 +67,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
     if (this.state.cardsDisplay.length === 0) return <p>No dishes in menu</p>;
     return (
       <>
-        <h1 className="text-center m-3">Order Delivery or Takeaway</h1>
+        <Title text="Order Delivery or Takeaway" />
 
         <div className="d-flex justify-content-between px-5">
           <div className="d-flex align-items-center">

@@ -29,7 +29,7 @@ Food delivery or takeaway with React.
 
 ## Run The App
 
-1. Run the server - cd client, then:
+1. Run the server - cd server, then:
 
 - Windows: set DEBUG=meal-on-time:\*; & npm start
   or: DEBUG=meal-on-time:\* npm start

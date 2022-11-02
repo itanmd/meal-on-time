@@ -7,6 +7,9 @@ interface LocationState {
   state: CardType;
 }
 
+type delivery = 'takeaway' | 'delivery';
+type payment = 'cc' | 'cash';
+
 function Order() {
   const location = useLocation();
   const locationState = location as LocationState;
@@ -15,8 +18,17 @@ function Order() {
   const [name, setName] = useState<string>('');
   const [address, setAddress]  = useState<string>('');
   const [phone, setPhone] = useState<string>('')
-  const [deliveryMethod, setDeliveryMethod] = useState<string>('takeaway');
-  const [paymentMethod, setPaymentMethod] = useState<string>('cc');
+  const [deliveryMethod, setDeliveryMethod] = useState<delivery>('takeaway');
+  const [paymentMethod, setPaymentMethod] = useState<payment>('cc');
+  
+  function updateDeliveryPrice(): number {
+    return deliveryMethod === "delivery" ? 2 : 0
+  }
+
+  function calcTotal(): number {
+    return order.price + updateDeliveryPrice();
+  }
+  
   return (
     <>
       <Title text={`Order: ${order.name}`}> 
@@ -57,13 +69,13 @@ function Order() {
                             <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" className="form-control" placeholder="Phone" />
                         </div>
                         <div className="col">
-                            <select value={deliveryMethod} onChange={(e) => setDeliveryMethod(e.target.value)} className="form-select">
+                            <select value={deliveryMethod} onChange={(e) => setDeliveryMethod(e.target.value as delivery)} className="form-select">
                               <option value="takeaway">Takeaway</option>
                               <option value="delivery">Delivery</option>
                             </select>
 
                             <label className="form-label">Payment Method:</label>
-                            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} className="form-select">
+                            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value as payment)} className="form-select">
                                 <option value="cc">Credit Card</option>
                                 <option value="cash">Cash</option>
                             </select>
@@ -83,7 +95,7 @@ function Order() {
                                     <label className="form-label">Delivery:</label>
                                 </div>
                                 <div className="col-8">
-                                    { }
+                                    {updateDeliveryPrice() }
                                 </div>
                             </div>
 
@@ -92,7 +104,7 @@ function Order() {
                                     <label className="form-label">Total:</label>
                                 </div>
                                 <div className="col-8">
-                                    { }
+                                    {calcTotal() }
                                 </div>
                             </div>
 

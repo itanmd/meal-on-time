@@ -13,7 +13,7 @@ interface MenuProps {
 interface MenuState {
   display: displayMode;
   cards: Array<CardType>;
-  cardsDisplay: Array<CardType>;
+  filteredByCategory: Array<CardType>;
   selectedCategory: string;
   categories: Array<string>;
 }
@@ -25,7 +25,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
     this.state = {
       display: props.defaultDisplay,
       cards: [],
-      cardsDisplay: [],
+      filteredByCategory: [],
       selectedCategory: "all",
       categories: ["all", "chicken", "vegeterian", "asian"],
     };
@@ -37,7 +37,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
       .then((json) => {
         this.setState(() => ({
           cards: json,
-          cardsDisplay: json,
+          filteredByCategory: json,
         }));
       });
   }
@@ -49,22 +49,19 @@ class Menu extends React.Component<MenuProps, MenuState> {
   };
 
   categoryChange = (selected: string) => {
-    // const selected = event.target.value;
-    //event.preventDefault();
-
     const cards = [...this.state.cards];
     const filtered = cards.filter((card) => {
       return card.category === selected;
     });
 
     this.setState((state, props) => ({
-      cardsDisplay: selected === "all" ? cards : filtered,
+      filteredByCategory: selected === "all" ? cards : filtered,
       selectedCategory: selected,
     }));
   };
 
   render() {
-    if (this.state.cardsDisplay.length === 0) return <p>No dishes in menu</p>;
+    if (this.state.filteredByCategory.length === 0) return <p>No dishes in menu</p>;
     return (
       <>
         <Title text="Order Delivery or Takeaway" />
@@ -101,7 +98,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
         </div>
 
         <div className={this.state.display}>
-          {this.state.cardsDisplay.map((card) => (
+          {this.state.filteredByCategory.map((card) => (
             <Card
               key={card._id}
               data={card}

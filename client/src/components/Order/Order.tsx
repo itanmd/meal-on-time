@@ -1,3 +1,4 @@
+import {useFormik} from "formik";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { CardType } from "../Card/Card";
@@ -15,9 +16,9 @@ function Order() {
   const locationState = location as LocationState;
   const order = locationState.state;
 
-  const [name, setName] = useState<string>('');
-  const [address, setAddress]  = useState<string>('');
-  const [phone, setPhone] = useState<string>('')
+  // const [name, setName] = useState<string>('');
+  // const [address, setAddress]  = useState<string>('');
+  // const [phone, setPhone] = useState<string>('')
   const [deliveryMethod, setDeliveryMethod] = useState<delivery>('takeaway');
   const [paymentMethod, setPaymentMethod] = useState<payment>('cc');
   
@@ -29,6 +30,19 @@ function Order() {
     return order.price + updateDeliveryPrice();
   }
   
+  const formik = useFormik({
+      initialValues: {
+        name: '',
+        address: '',
+        phone: '',
+      },
+
+      onSubmit: values => {
+        console.log(values);
+      }
+    } 
+  );
+
   return (
     <>
       <Title text={`Order: ${order.name}`}> 
@@ -64,9 +78,30 @@ function Order() {
          <div className="container">
                     <div className="row">
                         <div className="col">
-                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" className="form-control" placeholder="Name" />
-                            <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" className="form-control" placeholder="Address" />
-                            <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" className="form-control" placeholder="Phone" />
+                            <input 
+                            value={formik.values.name}
+                            onChange={formik.handleChange} 
+                            id="name"
+                            name="name"
+                            type="text" 
+                            className="form-control" 
+                            placeholder="Name" />
+                            <input 
+                            value={formik.values.address} 
+                            onChange={formik.handleChange} 
+                            id="address"
+                            name="address"
+                            type="text" 
+                            className="form-control" 
+                            placeholder="Address" />
+                            <input 
+                            value={formik.values.phone} 
+                            onChange={formik.handleChange} 
+                            id="phone"
+                            name="phone"
+                            type="text" 
+                            className="form-control" 
+                            placeholder="Phone" />
                         </div>
                         <div className="col">
                             <select value={deliveryMethod} onChange={(e) => setDeliveryMethod(e.target.value as delivery)} className="form-select">

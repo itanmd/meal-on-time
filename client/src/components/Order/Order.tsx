@@ -76,6 +76,7 @@ function Order() {
          <hr/>
 
          <div className="container">
+                  <form onSubmit={formik.handleSubmit}>
                     <div className="row">
                         <div className="col">
                             <input 
@@ -143,9 +144,10 @@ function Order() {
                                 </div>
                             </div>
 
-                            <button className="btn btn-primary btn-lg">Pay Now</button>
+                            <button type="submit"className="btn btn-primary btn-lg">Pay Now</button>
                         </div>
                     </div>
+                  </form>
                 </div>
 
 
